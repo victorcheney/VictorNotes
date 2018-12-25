@@ -1,0 +1,2 @@
+# VictorNotes
+learning notes
