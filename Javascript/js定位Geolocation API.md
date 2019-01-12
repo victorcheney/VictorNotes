@@ -1,4 +1,4 @@
-###HTML5 Geolocation API###
+### HTML5 Geolocation API
 
 在HTML5中新增了Geolocation API方便用户定位，获取地理位置信息。通过设备获取地理位置可以通过以下方式：
 
