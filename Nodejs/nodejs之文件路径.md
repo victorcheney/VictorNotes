@@ -1,9 +1,18 @@
-## nodejs中的几种文件路径比较 ##
+---
+title: Node--文件路径
+date: 2017-12-20 18:26:30
+categraies:
+  - Node
+tags:
+  - Node
+---
+
+### nodejs中的几种文件路径比较
 
 在调试一个node代码的时候，总是出问题，最后找到原因是由于路径的问题，node中的路径有全局变量`__dirname`、全局变量`__filename`、`./`、`../`以及`process.cwd()`
 首先看个例子：
 	
-   在桌面的nodedemo文件夹新建了simple.js文件，对以上几种路径进行输出
+ 在桌面的nodedemo文件夹新建了simple.js文件，对以上几种路径进行输出
 ![](nodepath.png)
 
 1、__dirname: 表示当前模块所在的文件夹的绝对路径。
@@ -15,24 +24,4 @@
 4、./在打印的时候要借助path.resolve()进行转换，与process.cwd()效果相同
 
 5、../表示当前工作目录的上级目录
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

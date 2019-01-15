@@ -1,6 +1,13 @@
-# Node 常用模块收藏
+---
+title: Node--常用模块收藏
+date: 2018-11-15 16:32:55
+categraies:
+tags:
+---
 
-## inquirer [https://www.npmjs.com/package/inquirer](https://www.npmjs.com/package/inquirer)
+### Node 常用模块收藏
+
+### inquirer [https://www.npmjs.com/package/inquirer](https://www.npmjs.com/package/inquirer)
 常用交互式命令行用户界面的集合:
 >提供错误反馈  
 >问问题  
@@ -8,13 +15,14 @@
 >验证答案  
 >管理分层提示  
 
-## Commander.js
+### Commander.js
 [https://github.com/tj/commander.js](https://github.com/tj/commander.js) 命令行完美解决方案
 
-## [roa](https://www.npmjs.com/package/ora)
+### [roa](https://www.npmjs.com/package/ora)
 
 控制台loading `npm install ora`
 
+```code
     const ora = require('ora');
 
     const spinner = ora('Loading unicorns').start();
@@ -23,11 +31,13 @@
         spinner.color = 'yellow';
         spinner.text = 'Loading rainbows';
     }, 1000);
+```
 
-## [progress](https://www.npmjs.com/package/progress)
+### [progress](https://www.npmjs.com/package/progress)
 
 控制台进度条 `npm install progress`
 
+```code
     var ProgressBar = require('progress');
 
     var bar = new ProgressBar(':bar', { total: 10 });
@@ -38,3 +48,4 @@
         clearInterval(timer);
     }
     }, 100);
+```
