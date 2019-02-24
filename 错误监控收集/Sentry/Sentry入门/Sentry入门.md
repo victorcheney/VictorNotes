@@ -1,3 +1,12 @@
+---
+title: 错误监控收集--Sentry入门
+date: 2019-12-15 18:43:59
+categories:
+  - 错误监控收集
+tags:
+  - 错误监控收集
+---
+
 # Sentry监控入门
 
 ## Docker内部部署：   
@@ -15,16 +24,22 @@
 
 Docker安装要求：  
 
-    Docker 1.10.0+  
-    Compose 1.6.0+ (optional)  
+```code
+Docker 1.10.0+  
+Compose 1.6.0+ (optional)  
+```
+
+<!-- more -->
 
 安装环境
 
-    ubuntu 16.04.2
-    phthon 2.7.15
-    Sentry 9.0.0
-    Docker version 18.06.1-ce
-    docker-compose version 1.23.2
+```code
+ubuntu 16.04.2
+phthon 2.7.15
+Sentry 9.0.0
+Docker version 18.06.1-ce
+docker-compose version 1.23.2
+```
 
 ### 配置SSL
 
@@ -67,23 +82,31 @@ Java https://docs.sentry.io/clients/java/migration/
 
 使用npm安装：
 
-    npm install @sentry/cli
+```code
+npm install @sentry/cli
+```
 
 安装完成查看版本：
 
-    sentry-cli -V
+```code
+sentry-cli -V
 
-    注：V是大写的 [sentry-cli --help] 命令查看更多命令，此处使用的是 [sentry-cli 1.37.1]
+注：V是大写的 [sentry-cli --help] 命令查看更多命令，此处使用的是 [sentry-cli 1.37.1]
+```
 
 ### 配置和身份验证
 
 对于大多数功能需要进行身份验证，通过`sentry-cli` 的login命令来完成，默认情况下，连接到的是Sentry的SaaS平台地址`sentry.io`,这里使用本地搭建的服务地址：
 
-    sentry login // 默认命令，url是 sentry.io
+```code
+sentry login // 默认命令，url是 sentry.io
+```
 
 添加 `--url` 参数配置sentry登录服务器地址：
 
-    sentry --url https://www.xxxx.com login
+```code
+sentry --url https://www.xxxx.com login
+```
 
 根据提示，如果已经生成了token，根据提示输入token即可
 
@@ -97,48 +120,64 @@ Java https://docs.sentry.io/clients/java/migration/
 
 创建一个release
 
-    sentry-cli releases -o [组织名称] -p [项目名称] new [release名称]
+```code
+sentry-cli releases -o [组织名称] -p [项目名称] new [release名称]
+```
 
 本地应用，在Raven的config中添加对应的release，指定版本后，每次上报到会分类到该版本下：
 
-    Raven.config('https://2514ce9dc9d841c9922347233a71beaa@www.fmbiz.com.cn:9001/2'，{
-        release: 'staging@1.0.1' // staging@1.0.1即为上一步创建的 release名称
-    }).install()
+```code
+Raven.config('https://2514ce9dc9d841c9922347233a71beaa@www.fmbiz.com.cn:9001/2'，{
+    release: 'staging@1.0.1' // staging@1.0.1即为上一步创建的 release名称
+}).install()
+```
 
 删除release命令:
 
-    sentry-cli releases -o [组织名称] -p [项目名称] delete [release名称]
+```code
+sentry-cli releases -o [组织名称] -p [项目名称] delete [release名称]
+```
 
     注：删除某个release时需要将其下的异常处理掉,并将该版本的sourcemap文件清空,完成上面两步可能还要等待2小时才能删除，不然会报错：该版本还有其它依赖。
 
 示例：
 
-    sentry-cli releases -o fanmi -p fmbiz-web new fmbiz@3.5.0
+```code
+sentry-cli releases -o fanmi -p fmbiz-web new fmbiz@3.5.0
+```
 
 成功的输出信息：`Created release fmbiz@3.5.0.`
 
 Raven配置：
 
-    Raven.config('https://2514ce9dc9d841c9922347233a71beaa@www.fmbiz.com.cn:9001/2'，{
-        release: 'fmbiz@3.5.0'
-    }).install()
+```code
+Raven.config('https://2514ce9dc9d841c9922347233a71beaa@www.fmbiz.com.cn:9001/2'，{
+    release: 'fmbiz@3.5.0'
+}).install()
+```
 
 #### sourceMap管理
 
 上传SourceMap
 
-    sentry-cli releases -o [组织] -p [项目] files [staging@1.0.1] upload-sourcemaps [map文件所在目录] --url-prefix [线上资源URI]
+```code
+sentry-cli releases -o [组织] -p [项目] files [staging@1.0.1] upload-sourcemaps [map文件所在目录] --url-prefix [线上资源URI]
+```
 
 示例：
 
-    sentry-cli releases -o fanmi -p fmbiz-web files fmbiz@3.5.0 upload-sourcemaps test/sourcemaps --url-prefix '~/'
+```code
+sentry-cli releases -o fanmi -p fmbiz-web files fmbiz@3.5.0 upload-sourcemaps test/sourcemaps --url-prefix '~/'
 
-    如果报413错误，配置nginx.conf在http中加上
-    client_max_body_size 50m;
+如果报413错误，配置nginx.conf在http中加上
+client_max_body_size 50m;
+```
 
 删除SourceMap：
 
-    sentry-cli releases -o [组织] -p [项目] files staging@1.0.1 delete --all
+```code
+sentry-cli releases -o [组织] -p [项目] files staging@1.0.1 delete --all
+```
 
 参考：
 
