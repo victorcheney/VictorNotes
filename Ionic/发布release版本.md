@@ -1,5 +1,7 @@
 # ionic 发布release版本
 
+[https://ionicframework.com/docs/cli/commands/cordova-build](https://ionicframework.com/docs/cli/commands/cordova-build)
+
 ## Android版本
 
 ### 运行以下cli命令：
